@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-box">
+    <h2>Login</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <p id="error-message" style="color:red;"></p>
+
+    <button onclick="login()">Login</button>
+</div>
+
+    <script>
+    function login() {
+        const user = document.getElementById("username").value;
+        const pass = document.getElementById("password").value;
+        const error = document.getElementById("error-message");
+
+        // 🔐 fake correct credentials
+        const correctUser = "cam&alex4L";
+        const correctPass = "kitty";
+
+        if (!user || !pass) {
+            error.textContent = "Please fill in all fields";
+        }
+        else if (user !== correctUser) {
+            error.textContent = "THATS WRONG";
+        }
+        else if (pass !== correctPass) {
+            error.textContent = "NOPE";
+        }
+        else {
+            error.textContent = "";
+            window.location.href = "poo.html";
+        }
+    }
+</script>
+
+</body>
+</html>

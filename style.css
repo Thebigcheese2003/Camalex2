@@ -1,0 +1,377 @@
+body {
+    font-family: Charm, sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+
+/* ============================= */
+/* LOGIN PAGE BACKGROUND */
+/* ============================= */
+
+.login-page {
+    background-image: url("love.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    height: 100vh;
+}
+
+
+/* ============================= */
+/* LANDING PAGE BACKGROUND */
+/* ============================= */
+
+.home-page {
+    background-image: url("love.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    min-height: 100vh;
+}
+
+
+/* ============================= */
+/* LOGIN BOX */
+/* ============================= */
+
+.login-box {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    background: transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.login-box input {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.login-box button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+/* ============================= */
+/* LANDING PAGE */
+/* ============================= */
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px;
+}
+
+main {
+    padding: 40px;
+    color: slateblue;
+    font-size: 30px;
+}
+
+
+/* ============================= */
+/* GALLERY */
+/* ============================= */
+
+.gallery-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+}
+
+
+/* ============================= */
+/* POLAROID CONTAINER */
+/* ============================= */
+
+.polaroid-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 40px;
+}
+
+
+/* ============================= */
+/* POLAROIDS */
+/* ============================= */
+
+.polaroid {
+    position: relative;
+
+    background: white;
+    padding: 10px 10px 20px 10px;
+    width: 220px;
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+    /* Scroll animation */
+    opacity: 0;
+    transform: translateY(40px) rotate(-2deg);
+
+    /* Smooth movement */
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        opacity 0.6s ease;
+
+    transform-style: preserve-3d;
+
+    cursor: pointer;
+}
+
+
+/* ============================= */
+/* POLAROID IMAGES */
+/* ============================= */
+
+.polaroid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+/* ============================= */
+/* CAPTION */
+/* ============================= */
+
+.caption {
+    position: absolute;
+
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    padding: 10px;
+
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+}
+
+
+/* Show caption when hovering */
+
+.polaroid:hover .caption {
+    opacity: 1;
+}
+
+
+/* ============================= */
+/* SCROLL ANIMATION */
+/* ============================= */
+
+.polaroid.show {
+    opacity: 1;
+    transform: translateY(0) rotate(-2deg);
+}
+
+
+/* ============================= */
+/* INDIVIDUAL POLAROID ROTATIONS */
+/* ============================= */
+
+.polaroid:nth-child(1) {
+    transform: rotate(-3deg);
+}
+
+.polaroid:nth-child(2) {
+    transform: rotate(4deg);
+}
+
+.polaroid:nth-child(3) {
+    transform: rotate(-2deg);
+}
+
+.polaroid:nth-child(4) {
+    transform: rotate(3deg);
+}
+
+.polaroid:nth-child(5) {
+    transform: rotate(-3deg);
+}
+
+.polaroid:nth-child(6) {
+    transform: rotate(2deg);
+}
+
+.polaroid:nth-child(7) {
+    transform: rotate(-2deg);
+}
+
+
+/* ============================= */
+/* HOVER POP-OUT */
+/* ============================= */
+
+.polaroid:hover:not(.selected) {
+    transform: scale(1.15) rotate(0deg) translateY(-10px);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ============================= */
+/* DARK BACKGROUND */
+/* ============================= */
+
+.overlay {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    z-index: 100;
+
+    cursor: pointer;
+}
+
+
+/* Show dark background */
+
+.overlay.active {
+    display: block;
+}
+
+
+/* ============================= */
+/* ENLARGED POLAROID */
+/* ============================= */
+
+.polaroid.selected {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    width: 350px;
+    max-width: 80vw;
+    max-height: 90vh;
+
+    padding: 15px 15px 25px 15px;
+
+    transform: translate(-50%, -50%) !important;
+
+    opacity: 1;
+
+    z-index: 101;
+
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+
+    cursor: default;
+
+    overflow: visible;
+}
+
+
+/* Enlarged image */
+
+.polaroid.selected img {
+    width: 100%;
+    height: auto;
+    max-height: 65vh;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* Keep the selected caption visible */
+
+.polaroid.selected .caption {
+    position: relative;
+
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    margin-top: 15px;
+
+    opacity: 1;
+
+    background: transparent;
+
+    padding: 0;
+
+    font-size: 18px;
+}
+
+
+/* Keep the date visible */
+
+.polaroid.selected .date {
+    margin-top: 10px;
+}
+
+
+/* Don't let hover mess with enlarged picture */
+
+.polaroid.selected:hover {
+    transform: translate(-50%, -50%) !important;
+}
+
+
+/* Make sure hover doesn't change
+   the selected polaroid */
+
+.polaroid.selected:hover {
+    transform: translate(-50%, -50%) scale(1.5) rotate(0deg) !important;
+}
+
+
+/* ============================= */
+/* SIDE GIFS */
+/* ============================= */
+
+.side-gif {
+    width: 450px;
+    height: 450px;
+
+    object-fit: contain;
+
+    transform: translateY(-340px);
+}
+
+/* Enlarged side GIF */
+
+.side-gif.enlarged {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    width: 600px;
+    max-width: 80vw;
+    max-height: 80vh;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 101;
+
+    cursor: default;
+}
+
+.side-gif2 {
+    width: 450px;
+    height: 450px;
+
+    object-fit: contain;
+
+    position: fixed;
+    left: 40px;
+}
