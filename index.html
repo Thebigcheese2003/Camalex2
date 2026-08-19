@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="home-page">
+
+    <!-- Dark background -->
+    <div class="overlay"></div>
+
+    <!-- Music player -->
+    <audio id="musicPlayer" loop></audio>
+
+    <main>
+
+        <p>Welcome to our website babe!!! 🎉</p>
+
+        <div class="gallery-area">
+
+            <img src="photo.gif" alt="Cute animation" class="side-gif">
+
+            <img src="ourgif.gif" alt="Cute animation" class="side-gif2">
+
+            <div class="polaroid-container">
+
+                <div class="polaroid">
+                    <img src="Park.jpeg" alt="Image 1">
+                    <div class="caption">
+                        I enjoyed it when you watched me skate!! Also when we played soccer heheh, I like being outdoors with you.
+                    </div>
+                    <div class="date">May 3, 2026</div>
+                </div>
+
+                <div class="polaroid">
+                    <img src="IMG_4876.jpeg" alt="Image 2">
+                    <div class="caption">
+                        Us on july 4th and we saw your friends band lolol we look so jolly
+                    </div>
+                    <div class="date">July 4, 2026</div>
+                </div>
+
+                <div class="polaroid">
+                    <img src="ramen.jpeg" alt="Image 3">
+                    <div class="caption">
+                        When we went to get ramen and we played I Spy :p
+                    </div>
+                    <div class="date">April 19, 2026</div>
+                </div>
+
+                <div class="polaroid">
+                    <img src="lol.jpeg" alt="Image 4">
+                    <div class="caption">
+                        LOL
+                    </div>
+                    <div class="date">July 17, 2026</div>
+                </div>
+
+                <div class="polaroid">
+                    <img src="Bamboo.jpeg" alt="Image 5">
+                    <div class="caption">
+                        We carved our initials on this bamboo!! We should go back and look at it next year
+                    </div>
+                    <div class="date">August 1, 2026</div>
+                </div>
+
+                <div class="polaroid">
+                    <img src="Hero.jpeg" alt="Image 6">
+                    <div class="caption">
+                        It was so fun at the arcade with you and playing pool heheh
+                    </div>
+                    <div class="date">July 31, 2026</div>
+                </div>
+
+                <div class="polaroid">
+                    <img src="Aia.jpeg" alt="Image 7">
+                    <div class="caption">
+                        I can't wait to go to more concerts with you &lt;3
+                    </div>
+                    <div class="date">July 25, 2026</div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+
+    <!-- ========================================= -->
+    <!-- FADE IN ON SCROLL -->
+    <!-- ========================================= -->
+
+    <script>
+
+        const items = document.querySelectorAll(".polaroid");
+
+        function showOnScroll() {
+
+            const triggerBottom = window.innerHeight * 0.85;
+
+            items.forEach(item => {
+
+                const boxTop = item.getBoundingClientRect().top;
+
+                if (boxTop < triggerBottom) {
+                    item.classList.add("show");
+                }
+
+            });
+        }
+
+        window.addEventListener("scroll", showOnScroll);
+
+        showOnScroll();
+
+    </script>
+
+
+    <!-- ========================================= -->
+    <!-- POLAROID + MUSIC -->
+    <!-- ========================================= -->
+
+    <script>
+
+        const polaroids = document.querySelectorAll(".polaroid");
+        const overlay = document.querySelector(".overlay");
+        const player = document.getElementById("musicPlayer");
+        const sideGif = document.querySelector(".side-gif");
+
+        // Each picture gets its own song
+        const songs = [
+            "Clarion.mp3",
+            "Greg.mp3",
+            "Helen.mp3",
+            "Angel.mp3",
+            "Pretty.mp3",
+            "Julie.mp3",
+            "Bare.mp3"
+        ];
+        const gifSong = "Eight.mp3";
+
+
+        // =========================================
+        // CLICK A POLAROID
+        // =========================================
+
+        polaroids.forEach((photo, index) => {
+
+            photo.addEventListener("click", function () {
+
+                // Remove previously selected photo
+                const previous = document.querySelector(".polaroid.selected");
+
+                if (previous) {
+                    previous.classList.remove("selected");
+                }
+
+
+                // Enlarge this photo
+                this.classList.add("selected");
+
+
+                // Show dark background
+                overlay.classList.add("active");
+
+
+                // Stop whatever song was playing
+                player.pause();
+
+                // Reset song position
+                player.currentTime = 0;
+
+
+                // Load the song belonging to this photo
+                player.src = songs[index];
+
+
+                // Play the song
+                player.play().catch(error => {
+                    console.log("Music could not autoplay:", error);
+                });
+
+            });
+
+        });
+
+
+        // =========================================
+        // CLICK DARK BACKGROUND
+        // =========================================
+
+
+sideGif.addEventListener("click", function () {
+
+    overlay.classList.add("active");
+
+    this.classList.add("enlarged");
+
+    player.pause();
+    player.currentTime = 0;
+
+    player.src = gifSong;
+
+    player.play().catch(error => {
+        console.log(error);
+    });
+
+});
+        overlay.addEventListener("click", function () {
+
+    document.querySelector(".polaroid.selected")
+        ?.classList.remove("selected");
+
+    sideGif.classList.remove("enlarged");
+
+    overlay.classList.remove("active");
+
+    player.pause();
+
+    player.currentTime = 0;
+
+});
+
+    </script>
+
+</body>
+</html>
